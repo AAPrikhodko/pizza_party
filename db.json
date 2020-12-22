@@ -1,0 +1,84 @@
+{
+  "pizzas": [
+    {
+      "name": "Margarita",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Margarita",
+      "cost": 2.99,
+      "id": 1,
+      "orderedQty": 0
+    },
+    {
+      "name": "4Cheese",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza 4Cheese",
+      "cost": 2.55,
+      "id": 2,
+      "orderedQty": 0
+    },
+    {
+      "name": "Meat",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Meat",
+      "cost": 4.99,
+      "id": 3,
+      "orderedQty": 0
+    },
+    {
+      "name": "Pepperoni",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Pepperoni",
+      "cost": 4.20,
+      "id": 4,
+      "orderedQty": 0
+    },
+    {
+      "name": "Carbonara",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Carbonara",
+      "cost": 2.99,
+      "id": 5,
+      "orderedQty": 0
+    },
+    {
+      "name": "Frutti di Mare",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Frutti di Mare",
+      "cost": 4.20,
+      "id": 6,
+      "orderedQty": 0
+    },
+    {
+      "name": "Napoletana",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Napoletana",
+      "cost": 3.60,
+      "id": 7,
+      "orderedQty": 0
+    },
+    {
+      "name": "Romana",
+      "image": "https://zheldor.pizza-milana.ru/upload/3e837035-1a5b-409e-945f-b44d73a1adbf/size-1//bc96a932-efa1-4247-8dad-ab2900df9403.png",
+      "desc": "Description of pizza Romana",
+      "cost": 2.90,
+      "id": 8,
+      "orderedQty": 0
+    }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "name": "User1",
+      "email": "test1@test.com",
+      "password": "qwerty",
+      "city": "Moscow"
+    },
+    {
+      "id": 1,
+      "name": "User2",
+      "email": "test2@test.com",
+      "password": "qwerty",
+      "city": "S.Petersburg"
+    }
+  ]
+}
