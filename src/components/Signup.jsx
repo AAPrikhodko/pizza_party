@@ -1,9 +1,13 @@
 import React from 'react'
 import {Formik} from 'formik'
 import * as yup from 'yup'
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {createUser} from "./../redux/authReducer";
 
-const Signup = () => {
+
+
+const Signup = ({createUser, accountBtnPressed}) => {
 
     const validateSchema = yup.object().shape({
         name: yup.string().required('required field').max(20, 'maximum 20 symbols'),
@@ -14,13 +18,14 @@ const Signup = () => {
 
     return (
         <div className='checkout_body'>
+            { (!accountBtnPressed) ?
             <Formik
                 initialValues={{
                     email: '',
                     password: ''
                 }}
                 validateOnBlur
-                onSubmit={values => console.log(values)}
+                onSubmit={values => createUser(values.name, values.email, values.password)}
                 validationSchema={validateSchema}
             >
                 {({
@@ -33,7 +38,7 @@ const Signup = () => {
                   }) => (
 
                     <div className='checkout_form'>
-                        <div className='form_title'> Please, Log IN</div>
+                        <div className='form_title'> Please, Create New account</div>
                         <div className='form_item'>
                             <input className='form_input' type={'text'} name={'name'} onChange={handleChange}
                                    onBlur={handleBlur} value={values.name} placeholder=" " autoComplete="off"/>
@@ -51,15 +56,24 @@ const Signup = () => {
                             {touched.password && errors.password && <span className='checkout_form_err'> {errors.password}</span>}
                         </div>
 
-                        <Link to='/'> <button className='form_button' disabled={!isValid}  type={'submit'}> Create account</button> </Link>
+                        <button className='form_button' disabled={!isValid}  type={'submit'} onClick={handleSubmit}> Create account</button>
                         <Link to='/signin'> <button className='form_button' > Sign in </button> </Link>
                     </div>
 
                 )}
             </Formik>
+                : <Redirect to={"/successAccount"}/>}
         </div>
     )
 }
 
-export default Signup
+
+const MapStateToProps =(state) => {
+    return {
+        users: state.auth.users,
+        accountBtnPressed:state.auth.accountBtnPressed
+    }
+}
+
+export default connect(MapStateToProps,{createUser})(Signup)
 

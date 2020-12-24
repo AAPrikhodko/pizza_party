@@ -3,9 +3,11 @@ import logo from './../img/logo.jpg'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
 import {switchCurrencyTo} from "../redux/homeReducer";
+import {logOutClicked} from "../redux/authReducer";
+import {Redirect} from "react-router-dom";
 
 
-const Navbar = ({cartQty, switchCurrencyTo}) => {
+const Navbar = ({cartQty, loggedUserIndex, users, switchCurrencyTo, logOutClicked}) => {
 
     const handleChange = (event) => {
         switchCurrencyTo(event.target.value)
@@ -14,7 +16,7 @@ const Navbar = ({cartQty, switchCurrencyTo}) => {
     return (
         <div className="navbar_wrapper">
             <div className="navbar_container">
-                <div className="logo"><img src={logo} alt="Picture not found"/></div>
+                <Link to="/"> <div className="logo"><img src={logo} alt="Picture not found"/></div> </Link>
                 <div className="tagline">Perfect place for perfect taste</div>
                 <div className="menu">
                     <span className='menuItem'>
@@ -29,10 +31,37 @@ const Navbar = ({cartQty, switchCurrencyTo}) => {
                         </Link>
                 </span>
                     <span className='menuItem'>
+                        {loggedUserIndex === null
+                            ? <>
+                                <Link to="/signin">
+                                    <button className='button_login'>Login</button>
+                                </Link>
+                            </>
+                            : <>
+                                <select onChange={() => logOutClicked()} className='button_login' name={'log'}>
+                                    <option selected disabled={true}>{users[loggedUserIndex].name}</option>
+                                    <option >Logout</option>
+                                </select>
+                                <Redirect to={"/"}/>
+                            </>
+                        }
+
+
+                        {/*
                         <Link to="/signin">
-                        <button className='button_login'>Login</button>
-                        </Link>
-                    </span>
+                        <button className='button_login'>
+                            {loggedUserIndex === null
+                                ? 'Login'
+                                : < select className='button_login'>
+                                    <option disabled={true}>{users[loggedUserIndex].name}</option>
+                                    <option onClick={logOutClicked}>Logout</option>
+                                </select>
+                            }
+                            {loggedUserIndex !== null && (<Redirect to={"/"}/>)}
+                                </button>
+                                </Link>
+*/}
+                            </span>
                 </div>
             </div>
         </div>
@@ -45,8 +74,10 @@ let mapStateToProps = (state) => {
         cartQty: state.cartPage.cart.reduce((acc, i) => {
             acc += i.orderedQty
             return acc
-        }, 0)
+        }, 0),
+        loggedUserIndex: state.auth.loggedUserIndex,
+        users: state.auth.users
     }
 }
 
-export default connect(mapStateToProps, {switchCurrencyTo})(Navbar)
+export default connect(mapStateToProps, {logOutClicked,switchCurrencyTo})(Navbar)

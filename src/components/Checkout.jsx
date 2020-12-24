@@ -1,28 +1,31 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Formik} from 'formik'
+import {Redirect} from "react-router-dom";
 import * as yup from 'yup'
+import {connect} from "react-redux";
+import {book} from "../redux/authReducer";
 
-const Checkout = () => {
 
 
+const Checkout = ({book, proceedBtnPressed}) => {
 
-    const validateSchema = yup.object().shape({
-        city: yup.string().required('required field').max(20, 'maximum 20 symbols'),
+      const validateSchema = yup.object().shape({
         street: yup.string().required('required field').max(20, 'maximum 20 symbols'),
         building: yup.string().required('required field').max(6, 'maximum 6 symbols'),
         flat: yup.string().required('required field'),
         floor: yup.number().typeError('should be a number').required('required field'),
         name: yup.string().required('required field').max(20, 'maximum 20 symbols'),
-        surname: yup.string().required('required field').max(20, 'maximum 20 symbols'),
+        surname: yup.string().max(20, 'maximum 20 symbols'),
         email: yup.string().required('required field').email('wrong e-mail address'),
         phone: yup.string().required('required field')
     })
 
     return (
+
         <div className='checkout_body'>
-        <Formik
+            { (!proceedBtnPressed) ?
+                <Formik
             initialValues={{
-                city: '',
                 street: '',
                 building: '',
                 flat: '',
@@ -35,7 +38,7 @@ const Checkout = () => {
                 phone: ''
             }}
             validateOnBlur
-            onSubmit={values => console.log(values)}
+            onSubmit={values => book(values)}
             validationSchema={validateSchema}
         >
             {({
@@ -49,12 +52,6 @@ const Checkout = () => {
 
                 <div className='checkout_form'>
                     <div className='form_title'> Please, fill these fields</div>
-
-                    <div className='form_item'>
-                        <input className='form_input' type={'text'} name={'city'} onChange={handleChange} onBlur={handleBlur} value={values.city} placeholder=" " autocomplete="off"/>
-                        <label className='form_label' >City* </label>
-                        {touched.city && errors.city && <span className='checkout_form_err'> {errors.city}</span>}
-                    </div>
 
                     <div className='form_item'>
                         <input className='form_input' type={'text'} name={'street'} onChange={handleChange} onBlur={handleBlur} value={values.street} placeholder=" " autocomplete="off"/>
@@ -121,9 +118,17 @@ const Checkout = () => {
 
             )}
         </Formik>
+            : <Redirect to={"/sucsessOrder"}/>}
         </div>
     )
 }
 
-export default Checkout
+
+const MapStateToProps = (state) => {
+    return {
+        proceedBtnPressed:state.cartPage.proceedBtnPressed
+    }
+}
+
+export default connect(MapStateToProps, {book})(Checkout)
 

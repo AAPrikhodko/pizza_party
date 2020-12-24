@@ -7,8 +7,8 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-
-
+import SucsessOrder from "./components/sucsessOrder";
+import SuccessAccount from "./components/sucsessAccount";
 
 function App() {
     return (
@@ -20,7 +20,8 @@ function App() {
                 <Route exact path='/checkout' render = {()=> <Checkout />} />
                 <Route exact path='/signin' render = {()=> <Signin />} />
                 <Route exact path='/signup' render = {()=> <Signup />} />
-
+                <Route exact path='/sucsessOrder' render = {()=> <SucsessOrder />} />
+                <Route exact path='/successAccount' render = {()=> <SuccessAccount />} />
             </BrowserRouter>
         </div>
     )

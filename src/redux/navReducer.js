@@ -2,7 +2,7 @@ const SWITCH_TO_USD = 'SWITCH_TO_USD'
 
 
 let initialState = {
-    currency: 'EUR'
+
 }
 
 const navReducer = (state = initialState, action) => {

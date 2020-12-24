@@ -1,3 +1,7 @@
+.rootApp{
+    background: green;
+}
+
 .pizzas {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -9,11 +13,21 @@
 }
 
 .pizzaItems {
+    position: relative;
     padding: 20px;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: yellow;;
+}
+
+.pizzaItem {
+    text-align: right;
+    padding: 2px 0;
 }
 
 .navbar_wrapper {
-    background-color: blueviolet;
+    background-color: darkslateblue;
 }
 
 .navbar_container {
@@ -22,13 +36,14 @@
 }
 
 .logo img {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 100%;
 }
 
 .tagline {
     color: aliceblue;
     align-self: center;
+
 }
 
 .menu {
@@ -49,25 +64,29 @@
 }
 
 .cart_item {
-    display: flex;
+
+    display: inline-flex;
+    width: 50%;
     align-items: center;
     margin: 10px 50px;
-    padding: 20px;
-    border-bottom: 2px dashed darkcyan;
+    padding: 20px 20px;
+    border: 2px solid black;
+    border-radius: 10px;
     font-size: large;
+    justify-content: center;
+    background-color: yellow;
 }
 
 .cart_item img {
     width: 20%;
     height: 20%;
-}
 
-.cart_item_img {
-    padding-left: 15%;
 }
 
 .cart_item_name {
     padding-left: 5%;
+    font-family: Arial, "Helveticantr Neue", Helvetica, sans-serif;
+    font-weight: bold;
 }
 
 .cart_item_buttons {
@@ -86,7 +105,16 @@
 }
 
 .cart_price {
+
     padding: 10px;
+    font-family: Arial, "Helveticantr Neue", Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 15px;
+}
+
+.cart_price_sub{
+    margin: 10px 0 10px 35%;
 
 }
 
@@ -101,7 +129,7 @@
     width: 300px;
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 0 4px 16px darkcyan;
+    box-shadow: 0 4px 16px darkslateblue;
     font-family: sans-serif;
     letter-spacing: 1px;
 }
@@ -114,19 +142,20 @@
     border: none;
     border-radius: 5px;
     color: white;
-    background-color: #8a2be2;
+    background-color: darkslateblue;
     outline: none;
     cursor: pointer;
     transition: 0.5s;
+    margin: 0 2px;
 
-}
+    }
 
 .form_button:focus {
-    background-color: rgba(138, 43, 226, 0.7);
+    background-color: rgba(72, 61, 139, 0.7);
 }
 
 .form_button:hover {
-    background-color: rgba(138, 43, 226, 0.7);
+    background-color: rgba(72, 61, 139, 0.7);
 }
 
 .form_title {
@@ -191,8 +220,8 @@
     padding: 5px 5px;
     border: none;
     border-radius: 5px;
-    color: #8a2be2;
-    background-color: #00ffff;
+    color: darkred;
+    background-color: white;
     outline: none;
     cursor: pointer;
     transition: 0.5s;
@@ -204,7 +233,7 @@
 .button_login:focus,
 .button_login:hover,
 .button_currency:hover {
-    background-color: rgba(0, 255, 255, 0.7);
+    background-color: rgb(255, 230, 0);
 }
 
 .cart_butt {
@@ -214,8 +243,8 @@
     padding: 5px 5px;
     border: none;
     border-radius: 5px;
-    color: white;
-    background-color: #008000;
+    color: #ffff00;
+    background-color: black;
     outline: none;
     cursor: pointer;
     transition: 0.5s;
@@ -230,10 +259,10 @@
     letter-spacing: 1px;
     font-size: 16px;
     padding: 3px 10px;
-    border: none;
+    border: solid 2px black;
     border-radius: 5px;
-    color: white;
-    background-color: #008000;
+    color: black;
+    background-color: yellow;
     outline: none;
     cursor: pointer;
     transition: 0.5s;
@@ -246,16 +275,16 @@
     padding: 5px 5px;
     border: 1px solid black;
     border-radius: 5px;
-    color: purple;
+    color: black;
     background-color: #ffff00;
     outline: none;
     cursor: pointer;
     transition: 0.5s;
+    position: absolute;
+    bottom: 10px;
 }
 
-
-.button_ToCart:focus,
-.button_ToCart:hover {
+.button_ToCart:focus{
     background-color: black;
     color: yellow;
 }

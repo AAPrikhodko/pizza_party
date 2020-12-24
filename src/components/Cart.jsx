@@ -4,15 +4,15 @@ import {connect} from "react-redux";
 import {decreaseQty, increaseQty} from "../redux/сartReducer";
 import cat from './../img/cat.jpg'
 
-const Cart = ({currancy, cart, increaseQty, decreaseQty}) => {
+const EUR_TO_USD = 1.23
 
-    let [localcurrancy, setCurrancy] = useState(currancy)
-    useEffect(()=>setCurrancy(currancy), [currancy])
+export const valueInCurrency = (value, currancy) => {
+    if (currancy === "USD") return (value *= EUR_TO_USD).toFixed(2)
+    else return value
+    return
+}
 
-    let [subTotal, setsubtotal] = useState(0)
-    let [deliveryCost, setdeliveryCost] = useState(0)
-    let [total, settotal] = useState(0)
-
+const Cart = ({currancy, cart, increaseQty, decreaseQty, subTotal, deliveryCost}) => {
 
     return (
         <>
@@ -29,7 +29,8 @@ const Cart = ({currancy, cart, increaseQty, decreaseQty}) => {
                                         <span> {i.orderedQty} </span>
                                         <span><button className='cart_butt_pl' onClick={() => increaseQty(ind)}> + </button> </span>
                                     </div>
-                                    <div className='cart_item_cost'> {(i.cost * i.orderedQty).toFixed(2)} {currancy}</div>
+                                    <div
+                                        className='cart_item_cost'> {valueInCurrency((i.cost * i.orderedQty).toFixed(2), currancy)} {currancy}</div>
                                 </div>
                             )
                         )
@@ -43,13 +44,20 @@ const Cart = ({currancy, cart, increaseQty, decreaseQty}) => {
                         <br/>
                     </div> :
                     <div className="cart_price">
-                        <div className="cart_price_sub">SubTotal: {subTotal} <span>{currancy}</span></div>
-                        <div className="cart_price_del">Delivery: {deliveryCost} <span>{currancy}</span></div>
-                        <div className="cart_price_tot">Total: {total} <span>{currancy}</span></div>
+                        <div className="cart_price_sub">SubTotal: {valueInCurrency(subTotal, currancy)}
+                            <span> {currancy}</span></div>
+                        <div className="cart_price_sub">Delivery: {valueInCurrency(deliveryCost, currancy)}
+                            <span> {currancy}</span></div>
+                        <div className="cart_price_sub">Total: {valueInCurrency(subTotal + deliveryCost, currancy)}
+                            <span> {currancy}</span></div>
                     </div>
                 }
-                <Link to={'/'}> <button className='cart_butt'>Choose more pizza!</button></Link>
-                <Link to={'/checkout'}> <button className='cart_butt' disabled={cart.length === 0}>Checkout</button> </Link>
+                <Link to={'/'}>
+                    <button className='cart_butt'>Choose more pizza!</button>
+                </Link>
+                <Link to={'/checkout'}>
+                    <button className='cart_butt' disabled={cart.length === 0}>Checkout</button>
+                </Link>
             </div>
         </>
     )
@@ -61,7 +69,6 @@ const MapStateToProps = (state) => {
         currancy: state.homePage.currancy,
         subTotal: state.cartPage.subTotal,
         deliveryCost: state.cartPage.deliveryCost,
-        total: state.cartPage.total
     }
 }
 

@@ -1,34 +1,18 @@
 const ADD_TO_CART = 'ADD_TO_CART'
 const INCR_QTY = 'INCR_QTY'
 const DECR_QTY = 'DECR_QTY'
-const SWITCH_CURR = 'SWITCH_CURR'
-const EUR_TO_USD = 1.23
-const USD_TO_EUR = 1 / 1.23
+const CART_TO_ZERO = 'CART_TO_ZERO'
+
 
 let initialState = {
     cart: [],
     subTotal: 0,
-    deliveryCost:0,
-    total:0
+    deliveryCost:11,
+    proceedBtnPressed:false
 }
 
 const cartReducer = (state = initialState, action) => {
-
-    function fixUSD(fl) {
-        let temp
-        temp = fl * EUR_TO_USD
-        temp = temp.toFixed(2)
-        return temp
-    }
-
-    function fixEUR(fl) {
-        let temp
-        temp = fl * USD_TO_EUR
-        temp = temp.toFixed(2)
-        return temp
-    }
-
-
+    
     switch (action.type) {
         case ADD_TO_CART: {
             let stateCopy = {...state}
@@ -47,6 +31,8 @@ const cartReducer = (state = initialState, action) => {
                     stateCopy.cart.push(tempItem)
                 }
             }
+            stateCopy.subTotal += tempItem.cost
+            stateCopy.proceedBtnPressed = false
             return stateCopy
         }
 
@@ -54,6 +40,7 @@ const cartReducer = (state = initialState, action) => {
             let stateCopy = {...state}
             stateCopy.cart = [...state.cart]
             stateCopy.cart[action.ind].orderedQty++
+            stateCopy.subTotal += stateCopy.cart[action.ind].cost
             return stateCopy
 
         }
@@ -61,23 +48,19 @@ const cartReducer = (state = initialState, action) => {
         case DECR_QTY: {
             let stateCopy = {...state}
             stateCopy.cart = [...state.cart]
+            stateCopy.subTotal -= stateCopy.cart[action.ind].cost
             if (state.cart[action.ind].orderedQty === 1) {
                 stateCopy.cart.splice(action.ind, 1)
             } else stateCopy.cart[action.ind].orderedQty--
+
             return stateCopy
         }
-        case SWITCH_CURR: {
+
+        case CART_TO_ZERO: {
             let stateCopy = {...state}
-            if (state.currancy === 'EUR' && action.currency === 'USD') {
-                stateCopy.cart.map(e => (e.cost = fixUSD(e.cost))
-                )
-
-            }
-            if (state.currancy === 'USD' && action.currency === 'EUR') {
-                stateCopy.cart.map(e => (e.cost = fixEUR(e.cost))
-                )
-
-            }
+            stateCopy.cart = []
+            stateCopy.subTotal = 0
+            stateCopy.proceedBtnPressed = true
             return stateCopy
         }
         default:
@@ -89,7 +72,8 @@ const cartReducer = (state = initialState, action) => {
 export const addToCart = (pizzaItem) => ({type: ADD_TO_CART, pizzaItem})
 export const increaseQty = (ind) => ({type: INCR_QTY, ind})
 export const decreaseQty = (ind) => ({type: DECR_QTY, ind})
-export const switchCurrencyTo = (currency) => ({type: SWITCH_CURR, currency})
+/*export const switchCurrencyTo = (currency) => ({type: SWITCH_CURR, currency})*/
+export const cartToZero = () => ({type: CART_TO_ZERO})
 
 
 export default cartReducer
