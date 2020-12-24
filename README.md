@@ -22,6 +22,8 @@ You may:
   
 - create your own account and the log in with it
 
+webbApp link: https://best-pizza-in-the-world.netlify.app/ 
+
 Plans for updates:
 
 - to connect fake JSON server in order to save all the data (pizzas, users, order's history etc.) in the storage. 
